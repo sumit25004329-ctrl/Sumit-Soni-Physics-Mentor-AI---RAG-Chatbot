@@ -1,4 +1,5 @@
 import os
+import streamlit as st
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyPDFLoader
@@ -47,8 +48,10 @@ PROMPT = PromptTemplate(
 )
 
 # Here I use Groq freeApi and store it in other file and import its api file with keyword
+groq_key = st.secrets["GROQ_API_KEY"]
 llm = ChatGroq(
-    groq_api_key=api.api, # API key yahan jayegi
+    # groq_api_key=api.api, # API key yahan jayegi
+    groq_api_key=groq_key,
     model_name="llama-3.3-70b-versatile"
 )
 
@@ -79,5 +82,6 @@ while True:
         print("\n" + "-"*30 + "\n")
     except Exception as e:
         print(f"\nMentor: Sorry beta, I can't reply : {e}")
+
 
 
